@@ -4,29 +4,29 @@ package se.kth.sda8.todo.likes;
 import se.kth.sda8.todo.articles.Article;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 public class Like {
 
     @Id
-    @Column(name = "id")
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    private Article article;
+    @ManyToMany (mappedBy = "likes")
+    private List<Article> articles;
 
     public Like() {
     }
 
-    public Like(Long id, String name, Article article) {
+    public Like(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.article = article;
+
     }
 
     public Long getId() {
@@ -45,11 +45,4 @@ public class Like {
         this.name = name;
     }
 
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 }

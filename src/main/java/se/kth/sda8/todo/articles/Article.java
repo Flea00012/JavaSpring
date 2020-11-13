@@ -1,5 +1,6 @@
 package se.kth.sda8.todo.articles;
 
+import se.kth.sda8.todo.likes.Like;
 import se.kth.sda8.todo.topic.Topic;
 
 import javax.persistence.*;
@@ -25,6 +26,9 @@ public class Article {
 
     @ManyToMany
     private List<Topic> topics;
+
+    @ManyToMany
+    private List<Like> likes;
 
     public Article(){
 
@@ -78,5 +82,14 @@ public class Article {
     public void setTopic(List<Topic> topics) {
         this.topics = topics;
     }
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
 }
 
