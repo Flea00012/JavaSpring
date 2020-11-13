@@ -17,19 +17,12 @@ public class Topic {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany (mappedBy = "topic")
-    private List<Article> article;
-
-//    @ManyToMany(mappedBy = "topics")
-//    private List<Article> articles;
-
+    @ManyToMany (mappedBy = "topics")
+    private List<Article> articles;
 
 
     public Topic() {
     }
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "topic")
-//    private List<Article> articles;
 
     public Topic(Long id, String name) {
         this.id = id;
@@ -51,6 +44,10 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addArticle (Article article) {
+        articles.add(article);
     }
 
 

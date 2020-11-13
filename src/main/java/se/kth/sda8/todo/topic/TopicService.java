@@ -4,25 +4,24 @@ package se.kth.sda8.todo.topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TopicService {
 
     @Autowired
-    private TopicRepository repository;
+    private final TopicRepository repository;
 
-
-    public List<Topic> getAll(String sort) {
-        return repository.findAll().stream()
-                .sorted(Comparator.comparing(sort.equals("name") ? (Topic:: getName) : (null)))
-                .collect(Collectors.toList());
+    public TopicService(TopicRepository repository) {
+        this.repository = repository;
     }
 
-    // this might or might not return a topic -  so cool!!
+    public List<Topic> getAll() {
+        return repository.findAll();
+    }
+
+
     public Optional<Topic> getById(Long id) {
         return repository.findById(id);
     }
@@ -39,11 +38,8 @@ public class TopicService {
         repository.deleteById(id);
     }
 
-    public List<Topic> getAllById(Long articleId) {
-        return repository.findAllByArticleId(articleId);
-    }
 
-    public List<Topic> getAll() {
-        return repository.findAll();
+    public List<Topic> getAllByArticleId(Long articleId) {
+        return repository.findAllByArticles_id(articleId);
     }
 }

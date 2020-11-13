@@ -20,19 +20,14 @@ public class CommentController {
 
         //get a list of all the comment
         @GetMapping("")
-        public List<Comment> getComments(@RequestParam (required = false)  String sort, @RequestParam (required = false) Long articleId){
-                if (sort != null){
+        public List<Comment> getComments(@RequestParam (required = false) Long articleId){
+
+                if(articleId == null){
                         return commentService.getAll();
+                } else {
+                        return commentService.getAllById(articleId);
                 }
-                if(articleId != null){
-                        return commentService.getById()
-                }
-
-                return commentService.getAll(sort);
-
-
         }
-
 
         //get one comment
         @GetMapping("/{id}")
@@ -58,8 +53,6 @@ public class CommentController {
         public void delete(@PathVariable Long id){
             commentService.delete(id);
         }
-
-
 
 
 }

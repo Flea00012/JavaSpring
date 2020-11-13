@@ -14,6 +14,10 @@ public class CommentService {
     @Autowired
     private CommentRepository repository;
 
+    public CommentService(CommentRepository repository) {
+        this.repository = repository;
+    }
+
     public List<Comment> getAll(String sort) {
 
         if (sort == null){
@@ -26,9 +30,6 @@ public class CommentService {
     public List<Comment> getAll() {
         return repository.findAll();
     }
-
-
-
 
 
     public Optional<Comment> getById(Long id) {
@@ -53,6 +54,5 @@ public class CommentService {
     public List<Comment> getAllById(Long articleId) {
         return repository.findAllByArticleId(articleId);
     }
-
 
 }
