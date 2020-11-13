@@ -15,8 +15,17 @@ public class ArticleController {
 
     //get a list of all the articles
     @GetMapping("")
-    public List<Article> getAll(@RequestParam String sort){
-        return articleService.getAll(sort);
+    public List<Article> getAllArticles(@RequestParam(required = false) String sort,
+                                        @RequestParam(required = false) Long topicId) {
+        if(sort != null) {
+            sort = "author";
+            return articleService.getAll(sort);
+        }
+        if(topicId != null){
+            return articleService.getAllByTopicsId(topicId);
+        }
+        return articleService.getAll();
+
     }
 
     //get one article

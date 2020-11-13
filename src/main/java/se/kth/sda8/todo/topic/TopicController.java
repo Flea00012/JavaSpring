@@ -13,22 +13,20 @@ public class TopicController {
 
     @Autowired
     private TopicService topicService;
+    public TopicController(TopicService topicService) {
+        this.topicService = topicService;
+    }
 
     //get a list of all the topics
     @GetMapping("")
-    public List<Topic> getAll(@RequestParam String sort){
-
-        return topicService.getAll(sort);
-    }
-
-    @GetMapping("")
-    public List<Topic> getTopics(@RequestParam(required = false) Long articleId){
-        if(articleId == null){
+    public List<Topic> getAll(@RequestParam(required = false)
+                                      Long articleId) {
+        if(articleId == null) {
             return topicService.getAll();
-        }else{
-            return topicService.getAllById(articleId);
-        }
+        } else return topicService.getAllByArticleId(articleId);
     }
+
+
 
     //get all topics with articleId
     @GetMapping("/{id}")

@@ -23,12 +23,8 @@ public class Article {
     @Column(name = "authorName")
     private String authorName;
 
-    public void setTopic(List<Topic> topic) {
-        this.topic = topic;
-    }
-
     @ManyToMany
-    private List<Topic> topic;
+    private List<Topic> topics;
 
     public Article(){
 
@@ -40,7 +36,6 @@ public class Article {
         this.title = title;
         this.body = body;
         this.authorName = authorName;
-
 
     }
 
@@ -77,7 +72,11 @@ public class Article {
     }
 
     public List<Topic> getTopic() {
-        return topic;
+        return topics;
+    }
+
+    public void setTopic(List<Topic> topics) {
+        this.topics = topics;
     }
 }
 
