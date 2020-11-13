@@ -14,7 +14,7 @@ Please also note that the Postgres database has been used during this project al
 
 ## Running the code
 
-After downloading the files from ```bash git clone``` , please ensure that Docker is installed on the local machine, as well as ```bash Docker-Compose```. To start the database please run the command ```bash docker-compose up``` in the terminal, then use curl to generate data in the database. 
+After downloading the files from ``` bash git clone``` , please ensure that Docker is installed on the local machine, as well as ``` bash Docker-Compose```. To start the database please run the command ``` bash docker-compose up``` in the terminal, then use curl to generate data in the database. 
 
 ## MIT License
 
