@@ -1,10 +1,12 @@
 package se.kth.sda8.todo.likes;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class LikeService {
@@ -20,14 +22,9 @@ public class LikeService {
         return repository.findAll();
     }
 
-    public List<Like> getAllById(Long articleId) {
-        return repository.findAllByArticleId(articleId);
+    public Like getById(Long id) {
+        return repository.findById(id).orElseThrow(( ) -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
-    public Optional<Like> getById(Long id) {
-        return repository.findById(id);
-    }
-
 
     public Like create(Like newLike) {
         return repository.save(newLike);

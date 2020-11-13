@@ -1,9 +1,7 @@
 package se.kth.sda8.todo.likes;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,36 +16,32 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    //get a list of all the likes
+    //get a list of all the likes - note there is duplicity here
+
     @GetMapping("")
-    public List<Like> getLikes(@RequestParam (required = false) Long articleId){
-        if(articleId == null){
-            return likeService.getAll();
-        } else {
-            return likeService.getAllById(articleId);
-        }
+    public List<Like> getAll(){
+        return likeService.getAll();
     }
 
     //get one like
     @GetMapping("/{id}")
     public Like getById(@PathVariable Long id){
-        return likeService.getById(id)
-                .orElseThrow(( ) -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return likeService.getById(id);
     }
 
-    //create an comment
+    //create a like
     @PostMapping("")
     public Like create(@RequestBody Like newLike) {
         return likeService.create(newLike);
     }
 
-    //update an article
+    //update a like
     @PutMapping("")
     public Like update(@RequestBody Like updatedLike){
         return likeService.update(updatedLike);
     }
 
-    //delete an article
+    //delete a like
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         likeService.delete(id);
